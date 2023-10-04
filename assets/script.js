@@ -14,81 +14,78 @@ const slides = [
 	{
 		"image":"slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
-	},
-	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
 
 var baseSourceImgBanner = "./assets/images/slideshow/"
-let counter = 0
+
+let slideCounter = 0
 let leftSwipe = document.getElementById("banner-left-arrow");
 let rightSwipe = document.getElementById("banner-right-arrow");
 let bannerImgElement = document.getElementById("image-banner");
 let bannerTitleElement = document.getElementById("banner-title");
 let dotContainer = document.getElementById("dots");
 
+
+
+function updateBannerContent(){
+	bannerImgElement.src = baseSourceImgBanner + slides[slideCounter].image;
+	bannerTitleElement.innerHTML = slides[slideCounter].tagLine; 
+}
+
+function upadteDots(){
+	let dotSelector = document.getElementById("dot" + slideCounter);
+	dotSelector.classList = "dot dot_selected";
+}
+
+function dotRemover(){
+	let oldSelector = document.getElementById("dot" + slideCounter);
+	oldSelector.classList = "dot";
+}
+
+
 function addDots() {
 	for (i=0; i < slides.length; i++){
 		const dot = document.createElement("span");
 		dot.className = "dot";
 		dot.id = "dot" + i;
-		dotContainer.appendChild(dot)
+		dotContainer.appendChild(dot);
 		dot.addEventListener ("click", function (){
+			dotRemover();
 			dot.classList = "dot dot_selected";
+			updateBannerContent();
 		})
 	}
 }
 
-function updateBannerContent(){
-	bannerImgElement.src = baseSourceImgBanner + slides[counter].image;
-	bannerTitleElement.innerHTML = slides[counter].tagLine; 
-}
 
-function upadteDots(){
-	let dotSelector = document.getElementById("dot" + counter);
-	dotSelector.classList = "dot dot_selected";
-}
 
-function dotRemover(){
-	let oldSelector = document.getElementById("dot" + counter);
-	oldSelector.classList = "dot";
-}
 
-function updateActifDot(){
-	dotRemover();
-	upadteDots();
-	updateBannerContent;
-}
+
+
+
+
 
 addDots();
 upadteDots();
-updateActifDot();
+
 
 rightSwipe.addEventListener("click", function(){
 	dotRemover();
-	counter = (counter + 1) % slides.length;
+	slideCounter = (slideCounter + 1) % slides.length;
 	updateBannerContent();
 	upadteDots();
-	console.log(1 , counter);
+	console.log(1 , slideCounter);
 })
 
 leftSwipe.addEventListener("click", function(){
 	dotRemover();
-	counter = (counter - 1 + slides.length) % slides.length;
+	slideCounter = (slideCounter - 1 + slides.length) % slides.length;
 	updateBannerContent();
 	upadteDots();
-	console.log(counter);
+	console.log(slideCounter);
 })
 
-
-// dot.addEventListener("click", function(){
-// 	counter = 0;
-// 	upadteDots();
-// 	updateBannerContent();
-// 	console.log(counter);
-// })
 
 
 
