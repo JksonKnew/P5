@@ -59,22 +59,6 @@ function handleDotClick(index) {
     console.log('Dot numéro ' + index + ' a été cliqué !');
 }
 
-
-
-
-
-
-
-
-
-
-addDots();
-updateBannerContent();
-updateDots();
-
-
-
-
 rightSwipe.addEventListener("click", function(){
 	slideCounter = (slideCounter + 1) % slides.length;
 	updateBannerContent();
@@ -90,5 +74,8 @@ leftSwipe.addEventListener("click", function(){
 
 })
 
+addDots();
+updateBannerContent();
+updateDots();
 
 
